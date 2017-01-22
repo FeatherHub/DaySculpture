@@ -36,6 +36,20 @@ public class DataMother : MonoBehaviour
 
     void first_load()
     {
+        if(!File.Exists(fileDir))
+        {
+            fs = File.Create(fileDir);
+            sw = new StreamWriter(fs);
+            var defaultdata = DefaultData.getDefaultData();
+            for(int i = 0; i < defaultdata.Count; ++i)
+            {
+                sw.WriteLine(defaultdata[i]);
+            }
+            flush();
+            close();
+            first_load();
+        }
+
         fs = File.Open(fileDir, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
         sr = new StreamReader(fs);
     }
