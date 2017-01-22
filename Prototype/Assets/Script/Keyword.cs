@@ -1,26 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-//테스트할 것:
-//System.DateTime.Now("FORMAT") 결과값
-
-// date format: yyyy-mm-dd-hh-mm
-
 //역할:
 //키워드 데이터 묶음
 //조건과 비교연산
 //데이터 기록
 public class Keyword
 {
-    //근처 시간 대까지 포함하기 위함 <-- 추후 추가 1순위 
-    //public int includeAmount;
+    public int includeAmount = 15;
 
     string text;
     List<string> dates;
     int count;
     KeywordManager keywordManager;
 
-    Keyword()
+    public Keyword()
     {
         dates = new List<string>();
         count = 0;
@@ -31,7 +25,7 @@ public class Keyword
         keywordManager = km;
     }
 
-    public void setText(ref string t)
+    public void setText(string t)
     {
         text = t;
     }
@@ -41,6 +35,21 @@ public class Keyword
         return text;
     }
 
+    public List<string> getDates()
+    {
+        return dates;
+    }
+
+    public int getCount()
+    {
+        return count;
+    }
+
+    public void setCount(int c)
+    {
+        count = c;
+    }
+
     public void addDate(string date)
     {
         dates.Add(date);
@@ -48,7 +57,7 @@ public class Keyword
 
     public void onSelected()
     {
-        var now = System.DateTime.Now.ToString("yyyy-mm-dd-hh-mm");
+        var now = System.DateTime.Now.ToString(DataMother.dateFormat);
         Debug.Log("Keyword selected: " + now);
 
         dates.Add(now);
@@ -57,12 +66,20 @@ public class Keyword
         keywordManager.save();
     }
 
-    public bool isHHMatched(string date)
+    public int isHHMatched(string date)
     {
-        //If matched not found
-        //return null;
+        string hh = date.Substring(DataMother.hhStartIdx, 2);
 
-        //If matched found
-        return true;
+        int match_count = 0;
+        for(int i = 0; i < dates.Count; ++i)
+        {
+            var pastHH = dates[i].Substring(DataMother.hhStartIdx, 2); 
+            if(hh == pastHH)
+            {
+                ++match_count;
+            }
+        }
+        
+        return match_count;
     }
 }

@@ -7,6 +7,11 @@ public class KeywordUI : MonoBehaviour
     public Text text;
     Keyword keyword;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     void Start()
     {
         button.onClick.AddListener(onClicked);
@@ -20,9 +25,10 @@ public class KeywordUI : MonoBehaviour
     public void setKeyword(Keyword kw)
     {
         keyword = kw;
+        setText(keyword.getText());
     }
 
-    public void setText(string s)
+    void setText(string s)
     {
         text.text = s;
     }
@@ -30,6 +36,7 @@ public class KeywordUI : MonoBehaviour
     void onClicked()
     {
         //안내 메시지
+        //감사합니다
 
         keyword.onSelected();
     }
