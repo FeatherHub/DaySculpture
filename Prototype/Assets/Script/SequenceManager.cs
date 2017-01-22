@@ -15,12 +15,12 @@ public class SequenceManager : MonoBehaviour
     public KeywordManager km;
 
     //TEXT
-    Vector2 textStartPos = new Vector2(-100.0f, 70.0f);
-    Vector2 textPosDelta = new Vector2(200.0f, -50.0f);
+    Vector2 textStartPos = new Vector2(-60.0f, 70.0f);
+    Vector2 textPosDelta = new Vector2(100.0f, -50.0f);
 
     //UI
-    Vector2 uiStartPos = new Vector2(-120.0f, 95.0f);
-    Vector2 uiPosDelta = new Vector2(120.0f, -50.0f);
+    Vector2 uiStartPos = new Vector2(-90.0f, 95.0f);
+    Vector2 uiPosDelta = new Vector2(90.0f, -50.0f);
 
     enum SCENE_IDX
     {
